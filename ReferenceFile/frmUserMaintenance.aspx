@@ -603,7 +603,7 @@ var module = getParameterByName("transtype");
                                             </dx:LayoutItem>
 
 
-                                                <dx:LayoutItem Caption="User Type:" ColSpan="2" Name="User Type" >
+                                                <dx:LayoutItem Caption="User Type:" Name="User Type" >
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxComboBox ID="cbxusertype" runat="server" OnLoad="Comboboxload" Width="170px">
