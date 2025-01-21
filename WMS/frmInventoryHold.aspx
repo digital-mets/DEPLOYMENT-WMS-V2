@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmInventoryHold.aspx.cs" Inherits="GWL.frmInventoryHold" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -727,7 +727,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                            <dx:LayoutItem Caption="Hold Code:" Name="HoldCode" ColSpan="2">
+                                            <dx:LayoutItem Caption="Hold Code:" Name="HoldCode" ColSpan="1">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
 
@@ -749,7 +749,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                            <dx:LayoutItem Caption="Document Date:" Name="DocDate" ColSpan="2">
+                                            <dx:LayoutItem Caption="Document Date:" Name="DocDate" ColSpan="1">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxDateEdit ID="dtpdocdate" runat="server" Width="170px" OnLoad="Date_Load">
@@ -771,7 +771,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                            <dx:LayoutItem Caption="Remarks:" Name="Remarks" ColSpan="2">
+                                            <dx:LayoutItem Caption="Remarks:" Name="Remarks" ColSpan="1">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxTextBox ID="txtremarks" runat="server" OnLoad="TextboxLoad" Width="170px">
@@ -779,8 +779,8 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                            <dx:EmptyLayoutItem>
-                                            </dx:EmptyLayoutItem>
+                                    <%--        <dx:EmptyLayoutItem>
+                                            </dx:EmptyLayoutItem>--%>
                                         
                                             <dx:LayoutItem Caption="">
                                                 <LayoutItemNestedControlCollection>
@@ -1273,9 +1273,9 @@
                                                                     <Columns>
                                                                         <dx:GridViewDataTextColumn FieldName="DocNumber" PropertiesTextEdit-Native="true"
                                                                             VisibleIndex="0" Width="0px">
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                          
+                                                                         
+                                                                           
                                                                             <PropertiesTextEdit Native="True"></PropertiesTextEdit>
                                                                         </dx:GridViewDataTextColumn>
 
@@ -1305,13 +1305,13 @@
                                                               
 
                                                                         <dx:GridViewDataColumn FieldName="Selected" Width="0" VisibleIndex="2">
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                          
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataColumn>
 
 
-                                                                        <dx:GridViewDataTextColumn Caption="Record ID"  Name="Record ID" FieldName="RecordID" VisibleIndex="3" Visible="true" Width="30px" PropertiesTextEdit-ConvertEmptyStringToNull="true" ReadOnly="true" >
+                                                                        <dx:GridViewDataTextColumn Caption="Record ID"  Name="Record ID" FieldName="RecordID" VisibleIndex="3" Visible="true" Width="65px" PropertiesTextEdit-ConvertEmptyStringToNull="true" ReadOnly="true" >
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="ItemCode" VisibleIndex="4" Width="150px" Name="Item Code">
                                                                         </dx:GridViewDataTextColumn>
@@ -1373,7 +1373,7 @@
                                                                     </Columns>
                                                                     <ClientSideEvents CustomButtonClick="OnCustomClick" />
                                                                     <SettingsPager Mode="ShowAllRecords" />
-                                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible" ColumnMinWidth="200" VerticalScrollableHeight="0" />
+                                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible"  VerticalScrollableHeight="0" />
 
                                                                     <ClientSideEvents BatchEditConfirmShowing="OnConfirm"
                                                                         BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" SelectionChanged="OnGridViewSelectionChanged" />

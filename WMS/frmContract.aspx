@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmContract.aspx.cs" Inherits="GWL.frmContract" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Data.Linq" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Data.Linq" TagPrefix="dx" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -1887,9 +1887,12 @@
 
                                                                                                 <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Wrap="True"></HeaderStyle>
                                                                                             </dx:GridViewDataTextColumn>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Description" Name="Description" ShowInCustomizationForm="True" VisibleIndex="4" Width="180px" UnboundType="String" ReadOnly="true" HeaderStyle-Wrap="True" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" Settings-AllowSort="False">
+                                                                                            <dx:GridViewDataTextColumn FieldName="Description" Name="Description" ShowInCustomizationForm="True" VisibleIndex="4" Width="180px" UnboundType="String" HeaderStyle-Wrap="True" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" Settings-AllowSort="False">
                                                                                                 <Settings AllowSort="False"></Settings>
-
+                                                                                                <EditItemTemplate>
+                                                                                                    <dx:ASPxTextBox ID="txtBox" runat="server" ClientEnabled="false" 
+                                                                                                        Value='<%# Bind("Description") %>' />
+                                                                                                </EditItemTemplate>
                                                                                                 <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Wrap="True"></HeaderStyle>
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataTextColumn FieldName="BillingType" Caption="Bill Type" VisibleIndex="5" Width="150px" Name="BillingType" UnboundType="String" HeaderStyle-Wrap="True" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" Settings-AllowSort="False">
@@ -2466,8 +2469,12 @@
 
                                                                                                 <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Wrap="True"></HeaderStyle>
                                                                                             </dx:GridViewDataTextColumn>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Description" Name="Description" ShowInCustomizationForm="True" VisibleIndex="4" Width="180px" UnboundType="String" ReadOnly="true" HeaderStyle-Wrap="True" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" Settings-AllowSort="False">
+                                                                                            <dx:GridViewDataTextColumn FieldName="Description" Name="Description" ShowInCustomizationForm="True" VisibleIndex="4" Width="180px" UnboundType="String" HeaderStyle-Wrap="True" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" Settings-AllowSort="False">
                                                                                                 <Settings AllowSort="False"></Settings>
+                                                                                                <EditItemTemplate>
+                                                                                                    <dx:ASPxTextBox ID="txtBox" runat="server" ClientEnabled="false" 
+                                                                                                        Value='<%# Bind("Description") %>' />
+                                                                                                </EditItemTemplate>
                                                                                                 <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Wrap="True"></HeaderStyle>
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataSpinEditColumn Caption="Service Rate" FieldName="ServiceRate" Name="ServiceRate" ShowInCustomizationForm="True" VisibleIndex="5" Width="100px" HeaderStyle-Wrap="True" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" Settings-AllowSort="False">

@@ -1,7 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReportViewer.aspx.cs" Inherits="GWL.WebReports.ReportViewer" %>
 
 
-<%@ Register Assembly="DevExpress.XtraReports.v24.1.Web.WebForms, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraReports.Web" TagPrefix="dx" %>
+
+
+<%@ Register Assembly="DevExpress.XtraReports.v24.2.Web.WebForms, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraReports.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -10,15 +12,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="../js/PerfSender.js" type="text/javascript"></script>
     <title runat="server" id="txtReport"></title>
-    <%--  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.js" type="text/javascript"></sgcript>
+    <%--    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.js" type="text/javascript"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
-
     <script src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.js" type="text/javascript"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/cultures/globalize.cultures.js" type="text/javascript"></script>
-
-    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.0.js" type="text/javascript"></script>
-
-    <link href="js/jquery-ui-1.11.4/jquery-ui.css" type="text/css" rel="Stylesheet" />--%>
+    <script src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/cultures/globalize.cultures.js" type="text/javascript"></script>--%>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.0.js" type="text/javascript"></script>
+    <%--<link href="js/jquery-ui-1.11.4/jquery-ui.css" type="text/css" rel="Stylesheet" />--%>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>--%>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
         .custom-multivalue {
@@ -36,23 +37,37 @@
         </div>
     </script>
     <script type="text/C#" id="custom-dx-date">
-     <div data-bind="dxDateBox: { value: value, showSpinButtons: true, 
-        applyValueMode: 'instantly', closeOnValueChange: true, width:'10px', 
-        format: 'date', dxValidator: {validationRules: validationRules || [] }}"></div>       
+     <div data-bind="dxDateBox: { 
+  value: value, 
+  onValueChanged: function(e) { 
+    console.log('Selected Date-Time:', e.value); 
+        this.value = e.value;
+  },
+  showSpinButtons: true, 
+  applyValueMode: 'instantly', 
+  closeOnValueChange: true, 
+  width: '150px',
+  displayFormat: 'dd/MM/yyyy', 
+  dateSerializationFormat: 'yyyy-MM-ddTHH:mm:ssZ'
+}, 
+dxValidator: { validationRules: validationRules || [] }"></div>    
     </script>
     <script type="text/html" id="custom-dxrd-combobox">
-        <div data-bind="dxSelectBox: { dataSource: { store: values(), paginate: true, pageSize: 200 }, value: value, valueExpr: 'value', searchEnabled: true, displayExpr: 'displayValue', displayCustomValue: true, disabled: disabled }, dxValidator: { validationRules: $data.validationRules || [] }"></div>
+        <div data-bind="dxSelectBox: { dataSource: { 
+            store: values(), 
+            paginate: true, pageSize: 200 }, value: value, valueExpr: 'value', searchEnabled: true, displayExpr: 'displayValue', displayCustomValue: true, disabled: disabled }, dxValidator: { validationRules: $data.validationRules || [] }">
+        </div>
     </script>
 
     <script type="text/html" id="custom-dxrd-multivalue">
         <!-- ko with: value -->
         <div class="custom-multivalue" data-bind="dxTagBox: {
-    dataSource: { pageSize: 20, paginate: true, store: displayItems },
+    dataSource: { pageSize: 20, paginate: true, store: displayItems() },
     height: 'auto',
     values: ko.pureComputed(function () {
         if (isPending($data))
             return [];
-        return displayItems.filter(function (item) { return item.selected(); });
+        return displayItems().filter(function (item) { return item.selected(); });
     }),
     showSelectionControls: true,
     onFocusOut: updateValue,
@@ -80,8 +95,9 @@
         var module = getParameterByName("transtype");
         var id = getParameterByName("userid");
         var entry = getParameterByName("param");
+        let IsExport = false;
 
-        console.log(module, id, entry)
+        //console.log(module, id, entry)
 
         $(document).ready(function () {
             PerfStart(module, entry + '-i', id);
@@ -106,9 +122,6 @@
         var reprint = getParameterByName('reprinted');
 
         function CustomizeParameterEditors(s, e) {
-
-            // Comment by JAF 01/09/2024
-            // Start
             //if (e.info.editor.header === 'dxrd-multivalue') {
             //    e.info.editor.header = 'custom-dxrd-multivalue';
             //}
@@ -119,17 +132,37 @@
             //    }
             //}
             // End
+            //console.log(e.info.editor.header)
+            //console.log(s.parametersInfo.parameters)
+            //s.parametersInfo.parameters.forEach(function (editor) {
+            //    if (editor.Name == "DocDate") {
+            //        // Remove the time component by setting the editor's format.
+            //        editor.Format = "yyyy-MM-dd";
+            //    }
+            //});
 
             if (e.info.editor.header === 'dx-combobox') {
                 e.info.editor.header = 'custom-dxrd-combobox';
             }
             if (e.info.editor.header === 'dx-date') {
-                e.info.editor.header = 'custom-dx-date';
+                e.info.editor = $.extend({}, e.info.editor);
+                e.info.editor.extendedOptions = $.extend(e.info.editor.extendedOptions || {}, { type: 'date' });
+                /*e.info.editor.header = 'custom-dx-date';*/
+
+
             }
             if (e.info.editor.header === 'dx-boolean-select') {
-                e.info.editor.header = 'custom-dx-checkbox';
+                //e.info.editor = $.extend({}, e.info.editor);  // Clone the editor object to avoid mutation
+
+                //e.info.editor.header = 'dx-checkbox'; // Change to 'dxCheckBox' for checkbox type
+
+                //// Set additional options if necessary (e.g., label, value, etc.)
+                //e.info.editor.options = $.extend(e.info.editor.options || {}, {
+                //    value: e.value ? true : false, // Ensure the value is a boolean
+                //});
+                //console.log(e);
+                //var name = e.info.displayName;
             }
-            //var name = e.info.displayName;
             //if (name.includes("Date") && e.info.editor.header == 'dx-text') {
             //    e.info.editor.header = 'custom-dx-date';
             //    console.log(name)
@@ -155,8 +188,8 @@
             });
 
             var defaultPrintClickAction = actionPrint.clickAction;
-            actionPrint.clickAction = function () {
-                console.log(reprint);
+            actionPrint.clickAction = async function () {
+                //console.log(reprint);
                 if (reprint == "True") {
                     var r = confirm('Are you sure that you want to proceed with printing? ' +
                         'This will be marked as Re-Printed after this process');
@@ -167,8 +200,40 @@
                     }
                 }
                 else {
-                    defaultPrintClickAction();
+                    await Validation();
+
+                    if (IsExport == true) {
+                        await s.PerformCustomDocumentOperation("ExportToCustomPath");
+                    }
+
+                    await defaultPrintClickAction();
                 }
+            }
+        }
+
+        async function Validation() {
+            try {
+                const data = await $.ajax({
+                    type: "POST",
+                    url: "ReportViewer.aspx/ExportPDF",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ Action: "AutoUpload" }),
+                    dataType: "json",
+                    cache: false
+                });
+
+                if (data.d[0] !== "Success") {
+                    if (data.d[1] == 'IsNotForExport') {
+                        IsExport = false;
+                    } else {
+                        alert(data.d[0]);
+                        IsExport = false;
+                    }
+                } else {
+                    IsExport = true;
+                }
+            } catch (error) {
+                console.error("Error:", error);
             }
         }
 
@@ -177,7 +242,7 @@
             //s.previewModel.reportPreview.zoom(1);
             //s.previewModel.reportPreview.showMultipagePreview(1);
             //update by saa 10/16/2024
-            s.GetReportPreview().zoom = 1;
+            s.GetReportPreview().zoom = 0.9;
             //console.log(s);
             ResizeReport();
             var previewModel = s.GetPreviewModel();
@@ -220,7 +285,7 @@
         var module2 = getParameterByName("val").split('~');
 
         function perfSend2(loadTime) {
-            console.log(loadTime, module)
+            //console.log(loadTime, module)
             $.ajax({
                 type: "POST",
                 data: JSON.stringify({ ModuleID: module2[1], Entry: 'PView-load', Pkey: null, Interval: loadTime, UserId: id, }),
@@ -237,10 +302,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <%--<dx:ASPxButton ID="ASPxButton1" runat="server" Text="TEST" AutoPostBack="False">
+             <ClientSideEvents Click="btnOnClick" />
+            </dx:ASPxButton>--%>
             <dx:ASPxWebDocumentViewer ID="GWLReportViewer" runat="server" Height="300px" ClientInstanceName="report">
-                <ClientSideEvents Init="Init"
-                    CustomizeParameterEditors="CustomizeParameterEditors"
-                    CustomizeMenuActions="customizeMenu" />
+                <ClientSideEvents Init="Init" CustomizeParameterEditors="CustomizeParameterEditors" CustomizeMenuActions="customizeMenu" />
             </dx:ASPxWebDocumentViewer>
             <dx:ASPxCallback ID="cp" runat="server" OnCallback="cp_Callback"></dx:ASPxCallback>
             <script type="text/javascript">

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmRDESubconSummary.aspx.cs" Inherits="GWL.frmRDESubconSummary" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head runat="server">
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head runat="server">
     <title>Subcon Summary</title><link rel="Stylesheet" type="text/css" href="~/css/styles.css" /><%--Link to global stylesheet--%>
     <script src="../js/jquery-1.6.1.min.js" type="text/javascript"></script><%--NEWADD--%>
     <script src="../js/jquery-ui.min.js" type="text/javascript"></script><%--NEWADD--%>

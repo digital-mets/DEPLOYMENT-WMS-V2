@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmPutaway.aspx.cs" Inherits="GWL.frmPutaway" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -606,7 +606,7 @@ function OnValidation(s, e) { //Validation function for header controls (Set thi
                                                     </Columns>
                                                                      <ClientSideEvents CustomButtonClick="OnCustomClick" />
                                                     <SettingsPager Mode="ShowAllRecords" />
-                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" ColumnMinWidth="120" VerticalScrollableHeight="530" ShowFooter="True" /> 
+                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" VerticalScrollableHeight="530" ShowFooter="True" /> 
                                                     <ClientSideEvents BatchEditConfirmShowing="OnConfirm"
                                                         BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" />
                                                             <SettingsEditing Mode="Batch" />

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmItemAdjustmentOpen.aspx.cs" Inherits="GWL.frmItemAdjustmentOpen" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -941,22 +941,22 @@
                                                             <dx:LayoutItemNestedControlContainer runat="server">
                                                                 <dx:ASPxGridView ID="gv1" runat="server" AutoGenerateColumns="true" Width="1250px" SettingsBehavior-AllowSort="false"
                                                                     OnCommandButtonInitialize="gv_CommandButtonInitialize" OnCellEditorInitialize="gv1_CellEditorInitialize" ClientInstanceName="gv1"
-                                                                    OnBatchUpdate="gv1_BatchUpdate" KeyFieldName="RecordID" OnCustomCallback="gv1_CustomCallback">
+                                                                    OnBatchUpdate="gv1_BatchUpdate" KeyFieldName="RecordID" OnCustomCallback="gv1_CustomCallback"  >
                                                                     <SettingsBehavior AllowSort="False"></SettingsBehavior>
 
 
                                                                     <Columns>
-                                                                        <dx:GridViewDataTextColumn FieldName="RecordID" VisibleIndex="2" Visible="true" Width="40px" PropertiesTextEdit-ConvertEmptyStringToNull="true" ReadOnly="true">
+                                                                        <dx:GridViewDataTextColumn FieldName="RecordID" VisibleIndex="2" Visible="true" Width="65px" PropertiesTextEdit-ConvertEmptyStringToNull="true" ReadOnly="true">
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="ItemCode" VisibleIndex="3" Width="150px" Name="glItemCode">
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="ItemDescription" Caption="Description" VisibleIndex="4" Width="150px" Name="glItemCode">
                                                                         </dx:GridViewDataTextColumn>
-                                                                        <dx:GridViewDataTextColumn FieldName="PalletNumber" Caption="Pallet ID" Width="50px" ShowInCustomizationForm="True" VisibleIndex="5" Name="PalletNumber">
+                                                                        <dx:GridViewDataTextColumn FieldName="PalletNumber" Caption="Pallet ID"  ShowInCustomizationForm="True" VisibleIndex="5" Name="PalletNumber">
                                                                         </dx:GridViewDataTextColumn>
-                                                                        <dx:GridViewDataTextColumn Name="Location" ShowInCustomizationForm="True" Width="50px" VisibleIndex="6" FieldName="Location" UnboundType="String">
+                                                                        <dx:GridViewDataTextColumn Name="Location" ShowInCustomizationForm="True"  VisibleIndex="6" FieldName="Location" UnboundType="String">
                                                                         </dx:GridViewDataTextColumn>
-                                                                        <dx:GridViewDataSpinEditColumn Caption="Current Qty" FieldName="CurrentBulkQty" VisibleIndex="7" Width="50px">
+                                                                        <dx:GridViewDataSpinEditColumn Caption="Current Qty" FieldName="CurrentBulkQty" VisibleIndex="7" Width="100px">
                                                                             <PropertiesSpinEdit Increment="0" NullDisplayText="0" ConvertEmptyStringToNull="True" NullText="0" DisplayFormatString="{0:N}"
                                                                                 ClientInstanceName="CurrentBulkQty" MinValue="0">
                                                                             </PropertiesSpinEdit>
@@ -983,8 +983,8 @@
                                                                             </PropertiesSpinEdit>
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
                                                                         </dx:GridViewDataSpinEditColumn>
-                                                                        <dx:GridViewDataSpinEditColumn Caption="Adjustment Weight" FieldName="AdjustedQty" Name="Qty" ShowInCustomizationForm="True" VisibleIndex="12">
-                                                                            <PropertiesSpinEdit Increment="0" ClientInstanceName="AdjustedQty" ConvertEmptyStringToNull="False" NullText="0" DisplayFormatString="{0:N4}">
+                                                                        <dx:GridViewDataSpinEditColumn Caption="Adjustment Weight" FieldName="AdjustedQty" Width="150px" Name="Qty" ShowInCustomizationForm="True" VisibleIndex="12">
+                                                                            <PropertiesSpinEdit Increment="0" ClientInstanceName="AdjustedQty"  ConvertEmptyStringToNull="False" NullText="0" DisplayFormatString="{0:N4}">
                                                                             </PropertiesSpinEdit>
                                                                         </dx:GridViewDataSpinEditColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Unit" Caption="Unit" Name="Unit" ShowInCustomizationForm="True" VisibleIndex="13">
@@ -997,71 +997,71 @@
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn Caption="RR Date" FieldName="RRDate" ShowInCustomizationForm="True" VisibleIndex="17" UnboundType="String">
                                                                         </dx:GridViewDataTextColumn>
-                                                                        <dx:GridViewDataTextColumn Caption="Expiry Date" FieldName="ExpiryDate" ShowInCustomizationForm="True" VisibleIndex="18" UnboundType="String">
+                                                                        <dx:GridViewDataTextColumn Caption="Expiry Date" FieldName="ExpiryDate"   ShowInCustomizationForm="True" VisibleIndex="18" UnboundType="String">
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn Caption="Manufacturing Date" FieldName="Mkfgdate" Width="150px" ShowInCustomizationForm="True" VisibleIndex="18" UnboundType="String">
                                                                         </dx:GridViewDataTextColumn>
-                                                                        <dx:GridViewDataTextColumn FieldName="StorageType" Name="StorageType" ShowInCustomizationForm="True" VisibleIndex="19">
+                                                                        <dx:GridViewDataTextColumn FieldName="StorageType" Name="StorageType" Width="150px" ShowInCustomizationForm="True" VisibleIndex="19">
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field1" Caption="Field1" ShowInCustomizationForm="True" VisibleIndex="20" Name="Field1" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field2" Caption="Field2" Name="Field2" ShowInCustomizationForm="True" VisibleIndex="21" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field3" Caption="Field3" Name="Field3" ShowInCustomizationForm="True" VisibleIndex="22" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field4" Caption="Field4" Name="Field4" ShowInCustomizationForm="True" VisibleIndex="23" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field5" Caption="Field5" Name="Field5" ShowInCustomizationForm="True" VisibleIndex="24" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field6" Caption="Field6" Name="Field6" ShowInCustomizationForm="True" VisibleIndex="25" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field7" Caption="Field7" Name="Field7" ShowInCustomizationForm="True" VisibleIndex="26" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field8" Caption="Field8" Name="Field8" ShowInCustomizationForm="True" VisibleIndex="27" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
                                                                         <dx:GridViewDataTextColumn FieldName="Field9" Caption="Field9" Name="Field9" ShowInCustomizationForm="True" VisibleIndex="28" UnboundType="Bound" CellStyle-BackColor="#99ccff" Width="0px">
                                                                             <CellStyle BackColor="#99ccff"></CellStyle>
-                                                                            <HeaderStyle CssClass="hidden-column" />
-                                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                                            <CellStyle CssClass="hidden-column" />
+                                                                            
+                                                                         
+                                                                           
                                                                         </dx:GridViewDataTextColumn>
 
                                                                     </Columns>
                                                                     <ClientSideEvents CustomButtonClick="OnCustomClick" />
                                                                     <SettingsPager Mode="ShowAllRecords" />
-                                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible" ColumnMinWidth="200" VerticalScrollableHeight="0" />
+                                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible"  VerticalScrollableHeight="0" />
                                                                     <ClientSideEvents BatchEditConfirmShowing="OnConfirm"
                                                                         BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" />
                                                                     <SettingsEditing Mode="Batch" />

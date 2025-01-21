@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmPickList.aspx.cs" Inherits="GWL.frmPickList" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -60,6 +60,8 @@
                 width: 400px !important;
             }
         }
+
+        
     </style>
     <!--#endregion-->
     <!--#region Region Javascript-->
@@ -223,6 +225,20 @@
         var isSetTextRequired = false;
         var linecount = 1;
         let dataExp;
+        var RBulkQty
+        var RQty
+        var BaseQty
+        var Price
+        var BarcodeNo
+        var Field1
+        var Field2
+        var Field3
+        var Field4
+        var Field5
+        var Field6
+        var Field7
+        var Field8
+        var Field9
         function OnStartEditing(s, e) {//On start edit grid function     
             if (entry != "V") {
                 currentColumn = e.focusedColumn;
@@ -233,7 +249,16 @@
                 sizec = s.batchEditApi.GetCellValue(e.visibleIndex, "SizeCode");
                 unitc = s.batchEditApi.GetCellValue(e.visibleIndex, "Unit");
                 bulkqty = s.batchEditApi.GetCellValue(e.visibleIndex, "BulkQty");
+                RBulkQty = s.batchEditApi.GetCellValue(e.visibleIndex, "RBulkQty");
                 index1 = e.visibleIndex;
+
+                console.log("ItemCode:", itemc);
+                console.log("ColorCode:", colorc);
+                console.log("ClassCode:", classc);
+                console.log("SizeCode:", sizec);
+                console.log("Unit:", unitc);
+                console.log("BulkQty:", bulkqty);
+                console.log("Visible Index:", index1);
 
                 if (bulkqty == null) {
                     bulkqty = 0;
@@ -1263,6 +1288,26 @@
             setAllocStatus(itemRemainingQty, currentIndex)
         }
     </script>
+   <%-- <script>
+        function switchTabsToFixAlignment() {
+
+            tabbedLayoutGroup.SetActiveTabIndex(1);
+
+            setTimeout(() => {
+                tabbedLayoutGroup.SetActiveTabIndex(0);
+            }, 100);
+        }
+
+        window.onload = function () {
+            switchTabsToFixAlignment();
+        };
+    </script>--%>
+
+<%--    <script type="text/javascript">
+        function OnEndCallback(s, e) {
+            s.AdjustControl(); 
+        }
+    </script>--%>
     <!--#endregion-->
 </head>
 <body style="height: 910px">
@@ -1287,19 +1332,20 @@
             <ClientSideEvents CloseUp="function (s, e) { cp.PerformCallback('refgrid') }" />
         </dx:ASPxPopupControl>
 
-        <dx:ASPxCallbackPanel ID="cp" runat="server" Width="806px" Height="641px" ClientInstanceName="cp" OnCallback="cp_Callback">
+        <dx:ASPxCallbackPanel ID="cp" runat="server" Width="805px" Height="641px" ClientInstanceName="cp" OnCallback="cp_Callback">
             <ClientSideEvents EndCallback="gridView_EndCallback"></ClientSideEvents>
+            <%--<ClientSideEvents EndCallback="function(s, e) { switchTabsToFixAlignment(); }"></ClientSideEvents>--%>
             <PanelCollection>
                 <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
                     <dx:ASPxFormLayout ID="frmlayout1" runat="server" Width="850px" Style="margin-left: -3px; margin-right: 0px;">
-                        <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="600" />
+                        <SettingsAdaptivity AdaptivityMode="SingleColumnWindowLimit" SwitchToSingleColumnAtWindowInnerWidth="600" />  
 
                         <Items>
                             <%--<!--#region Region Header --> --%>
 
-                            <dx:TabbedLayoutGroup>
+                            <dx:TabbedLayoutGroup ClientInstanceName ="tabbedLayoutGroup" >
                                 <Items>
-                                    <dx:LayoutGroup Caption="General" ColCount="2">
+                                    <dx:LayoutGroup Caption="General" ColCount="2" >
                                         <Items>
                                             <dx:LayoutGroup Caption="" ColCount="2" Width="55%">
                                                 <Items>
@@ -1369,7 +1415,7 @@
                                                             </dx:LayoutItemNestedControlContainer>
                                                         </LayoutItemNestedControlCollection>
                                                     </dx:LayoutItem>
-                                                    <dx:LayoutItem Caption="Picklist Type:" Name="PiclistType" ColSpan="2">
+                                                    <dx:LayoutItem Caption="Picklist Type:" Name="PicKlistType" >
                                                         <LayoutItemNestedControlCollection>
                                                             <dx:LayoutItemNestedControlContainer runat="server">
                                                                 <dx:ASPxComboBox ID="cbxPickListType" ClientInstanceName="glpicktype" Width="150px" runat="server" OnLoad="Comboboxload">
@@ -1427,7 +1473,7 @@
                                                             </dx:LayoutItemNestedControlContainer>
                                                         </LayoutItemNestedControlCollection>
                                                     </dx:LayoutItem>
-                                                    <dx:LayoutItem Caption="Outbound No:" Name="OutboundNo" ColSpan="2">
+                                                    <dx:LayoutItem Caption="Outbound No:" Name="OutboundNo" >
                                                         <LayoutItemNestedControlCollection>
                                                             <dx:LayoutItemNestedControlContainer runat="server">
                                                                 <dx:ASPxTextBox ID="txtOutboundNo" runat="server" Width="150px" OnLoad="TextboxLoad" Enabled="False" ReadOnly="True">
@@ -1533,7 +1579,7 @@
                                                             </dx:LayoutItemNestedControlContainer>
                                                         </LayoutItemNestedControlCollection>
                                                     </dx:LayoutItem>
-                                                    <dx:LayoutItem Caption="Remarks:" Name="Remarks">
+                                                    <dx:LayoutItem Caption="Remarks:" Name="Remarks" ColumnSpan="2">
                                                         <LayoutItemNestedControlCollection>
                                                             <dx:LayoutItemNestedControlContainer runat="server">
                                                                 <dx:ASPxTextBox ID="txtremarks" runat="server" OnLoad="TextboxLoad" Width="150px">
@@ -1589,9 +1635,9 @@
                                                     <dx:LayoutItem ClientVisible="true" Caption="">
                                                         <LayoutItemNestedControlCollection>
                                                             <dx:LayoutItemNestedControlContainer runat="server">
-                                                                <dx:ASPxGridView ID="gv4" runat="server" ClientInstanceName="gv4" AutoGenerateColumns="true" Width="98%">
+                                                                <dx:ASPxGridView ID="gv4" runat="server" ClientInstanceName="gv4" AutoGenerateColumns="true" Width="98%"> 
                                                                     <SettingsPager Mode="ShowAllRecords" />
-                                                                    <Settings VerticalScrollBarMode="Visible" VerticalScrollableHeight="215" />
+                                                                    <Settings VerticalScrollBarMode="Visible" ColumnMinWidth ="93" VerticalScrollableHeight="215" /> <%--KC - 1/16/2025 add ColumnMinWidth--%>
                                                                 </dx:ASPxGridView>
                                                             </dx:LayoutItemNestedControlContainer>
                                                         </LayoutItemNestedControlCollection>
@@ -1636,7 +1682,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                            <dx:LayoutItem Caption="Delivery Date" Name="DeliveryDate" ColSpan="2">
+                                            <dx:LayoutItem Caption="Delivery Date" Name="DeliveryDate" ColSpan="1">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxDateEdit ID="dtpdeliverydate" runat="server" OnLoad="Date_Load" Width="170px">
@@ -1829,8 +1875,8 @@
                                         </Items>
                                         <Items>
 
-                                            <dx:LayoutItem Caption=" Transfers:"></dx:LayoutItem>
-                                            <dx:LayoutItem ClientVisible="true" Caption="">
+                                            <dx:LayoutItem Caption=" Transfers:" ColumnSpan="2"></dx:LayoutItem>
+                                            <dx:LayoutItem ClientVisible="true" Caption="" ColumnSpan="2">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxGridView ID="tblTransfer" runat="server" ClientInstanceName="tblTransfer" AutoGenerateColumns="true">
@@ -1911,11 +1957,11 @@
                                                     <SettingsEditing Mode="Batch" />
                                                 </dx:ASPxGridView>
 
-                                                <dx:ASPxGridView ID="gv1" runat="server" AutoGenerateColumns="False" Width="747px"
+                                                <dx:ASPxGridView ID="gv1" runat="server" AutoGenerateColumns="False" Width ="1250px"
                                                     OnCommandButtonInitialize="gv_CommandButtonInitialize" OnCellEditorInitialize="gv1_CellEditorInitialize" ClientInstanceName="gv1"
                                                     OnRowValidating="grid_RowValidating" OnBatchUpdate="gv1_BatchUpdate" KeyFieldName="DocNumber;LineNumber" OnInit="gv1_Init" ClientVisible="true"
-                                                    SettingsBehavior-AllowSort="false" OnInitNewRow="gv1_InitNewRow" OnCustomCallback="gv1_CustomCallback">
-                                                    <Settings ShowFilterRowMenu="true" ShowFilterRowMenuLikeItem="true" ShowFilterRow="True" />
+                                                    SettingsBehavior-AllowSort="false" OnInitNewRow="gv1_InitNewRow" OnCustomCallback="gv1_CustomCallback" >
+                                                    <Settings ShowFilterRowMenu="true" ShowFilterRowMenuLikeItem="true" ShowFilterRow="True" /> <%--KC - 1/16/2025 previous width 747--%>
                                                     <ClientSideEvents Init="OnInitTrans" />
                                                     <Columns>
 
@@ -1993,9 +2039,9 @@
 
 
                                                         <dx:GridViewDataTextColumn FieldName="ColorCode" VisibleIndex="7" Width="0px" UnboundType="String">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                             <EditItemTemplate>
                                                                 <dx:ASPxGridLookup ID="glColorCode" runat="server" AutoGenerateColumns="False" AutoPostBack="false"
                                                                     KeyFieldName="ColorCode" ClientInstanceName="gl2" TextFormatString="{0}" Width="80px" OnLoad="gvLookupLoad" OnInit="lookup_Init">
@@ -2016,9 +2062,9 @@
                                                             </EditItemTemplate>
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="ClassCode" VisibleIndex="8" Width="0px" UnboundType="String">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                             <EditItemTemplate>
                                                                 <dx:ASPxGridLookup ID="glClassCode" runat="server" AutoGenerateColumns="False" AutoPostBack="false" OnInit="lookup_Init"
                                                                     KeyFieldName="ClassCode" ClientInstanceName="gl3" TextFormatString="{0}" Width="80px" OnLoad="gvLookupLoad">
@@ -2040,9 +2086,9 @@
                                                         </dx:GridViewDataTextColumn>
 
                                                         <dx:GridViewDataTextColumn FieldName="SizeCode" VisibleIndex="9" Width="0px" UnboundType="String">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                             <EditItemTemplate>
                                                                 <dx:ASPxGridLookup ID="glSizeCode" runat="server" AutoGenerateColumns="False" AutoPostBack="false" OnInit="lookup_Init"
                                                                     KeyFieldName="SizeCode" ClientInstanceName="gl4" TextFormatString="{0}" Width="80px" OnLoad="gvLookupLoad">
@@ -2085,9 +2131,9 @@
                                                             </PropertiesSpinEdit>
                                                         </dx:GridViewDataSpinEditColumn>
                                                         <dx:GridViewDataTextColumn PropertiesTextEdit-Native="true" Width="100px" Caption="Distribution Unit" FieldName="DistriUnit" Name="DistriUnit" ShowInCustomizationForm="True" VisibleIndex="10" UnboundType="Bound" ReadOnly="true">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                             <Settings AutoFilterCondition="Contains" />
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="InvStatus" Caption="AllocStatus" Name="InvStatus" ShowInCustomizationForm="True" Width="100px" VisibleIndex="10" UnboundType="Bound" ReadOnly="true">
@@ -2244,59 +2290,59 @@
                                                             </PropertiesTextEdit>
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Price" Caption="Price" Name="Price" ShowInCustomizationForm="True" Width="0px" VisibleIndex="21" UnboundType="Decimal">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
-                                                        <dx:GridViewDataTextColumn FieldName="BarcodeNo" ShowInCustomizationForm="True" VisibleIndex="23" Width="0px" Caption="Barcode Number">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                        <dx:GridViewDataTextColumn FieldName="BarcodeNo" ShowInCustomizationForm="True" VisibleIndex="23" Width="0px"  Caption="Barcode Number">
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field1" Caption="Field1" Name="Field1" ShowInCustomizationForm="True" Width="0px" VisibleIndex="24" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field2" Caption="Field2" Name="Field2" ShowInCustomizationForm="True" Width="0px" VisibleIndex="25" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field3" Caption="Field3" Name="Field3" ShowInCustomizationForm="True" Width="0px" VisibleIndex="26" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field4" Caption="Field4" Name="Field4" ShowInCustomizationForm="True" Width="0px" VisibleIndex="27" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field5" Caption="Field5" Name="Field5" ShowInCustomizationForm="True" Width="0px" VisibleIndex="28" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field6" Caption="Field6" Name="Field6" ShowInCustomizationForm="True" Width="0px" VisibleIndex="29" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field7" Caption="Field7" Name="Field7" ShowInCustomizationForm="True" Width="0px" VisibleIndex="30" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field8" Caption="Field8" Name="Field8" ShowInCustomizationForm="True" Width="0px" VisibleIndex="31" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="Field9" Caption="Field9" Name="Field9" ShowInCustomizationForm="True" Width="0px" VisibleIndex="32" UnboundType="Bound">
-                                                            <HeaderStyle CssClass="hidden-column" />
-                                                            <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                           
+                                                           
+                                                            
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="BulkUnit" VisibleIndex="7" Name="BulkUnit" PropertiesTextEdit-ClientInstanceName="gbulkunit" Width="80px">
                                                             <Settings AutoFilterCondition="Contains" />
@@ -2384,12 +2430,13 @@
                                                         </DeleteButton>--%>
                                                     </SettingsCommandButton>
                                                     <SettingsPager Mode="ShowAllRecords" />
-                                                    <SettingsBehavior AllowSort="false" />
-                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" ColumnMinWidth="120" VerticalScrollableHeight="530" />
+                                                    <SettingsBehavior AllowSort="false" /> 
+                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" VerticalScrollableHeight="530"/>
                                                     <ClientSideEvents BatchEditConfirmShowing="OnConfirm" BatchEditRowValidating="Grid_BatchEditRowValidating"
                                                         BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" />
 
                                                     <SettingsEditing Mode="Batch" />
+                                              <%--      <ClientSideEvents EndCallback="OnEndCallback" />--%>
                                                 </dx:ASPxGridView>
 
                                                 <table id="TotDate" class="TotDate" style="margin-bottom: 50px;">

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmItemReservation.aspx.cs" Inherits="GWL.frmItemReservation" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -819,8 +819,8 @@ function InitTrans(s, e) {
                                                     </LayoutItemNestedControlCollection>
                                                 </dx:LayoutItem>
 
-                                             <dx:EmptyLayoutItem>
-                                            </dx:EmptyLayoutItem>
+                                            <%-- <dx:EmptyLayoutItem>
+                                            </dx:EmptyLayoutItem>--%>
                                             <dx:LayoutItem Caption="">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
@@ -1005,7 +1005,7 @@ function InitTrans(s, e) {
                                                 <dx:ASPxGridView  ID="gv1" runat="server" AutoGenerateColumns="False" Width="1250px" SettingsBehavior-AllowSort="false" 
                                                     OnCommandButtonInitialize="gv_CommandButtonInitialize" OnCellEditorInitialize="gv1_CellEditorInitialize" ClientInstanceName="gv1" 
                                                     OnBatchUpdate="gv1_BatchUpdate" KeyFieldName="RecordID" OnCustomCallback="gv1_CustomCallback">                       
-<SettingsBehavior AllowSort="False"></SettingsBehavior>
+                                                <SettingsBehavior AllowSort="False"></SettingsBehavior>
 
                                                     
                                                     <Columns>
@@ -1038,12 +1038,12 @@ function InitTrans(s, e) {
                                                            
                                                             </EditItemTemplate>
                                                         </dx:GridViewDataTextColumn>
-                                                     <dx:GridViewDataSpinEditColumn Caption="Current Qty"  FieldName="CurrentBulkQty" VisibleIndex="7" Width="100px">
+                                                     <dx:GridViewDataSpinEditColumn Caption="Current Qty"  FieldName="CurrentBulkQty" VisibleIndex="7" Width="150px">
                                                                 <PropertiesSpinEdit Increment="0" NullDisplayText="0" ConvertEmptyStringToNull="True" NullText="0" DisplayFormatString="{0:N}"
                                                                     ClientInstanceName="CurrentBulkQty" MinValue="0">
                                                                 </PropertiesSpinEdit>
                                                             </dx:GridViewDataSpinEditColumn>
-                                                        <dx:GridViewDataSpinEditColumn FieldName="TargetBulkQty" Caption="Reserved Qty" VisibleIndex="8" Width="100px" UnboundType="Decimal"  CellStyle-BackColor="#99ccff">
+                                                        <dx:GridViewDataSpinEditColumn FieldName="TargetBulkQty" Caption="Reserved Qty" VisibleIndex="8" Width="150px" UnboundType="Decimal"  CellStyle-BackColor="#99ccff">
                                                                 <PropertiesSpinEdit Increment="0" NullDisplayText="0" ConvertEmptyStringToNull="True" NullText="0" DisplayFormatString="{0:N}"
                                                                     ClientInstanceName="TargetBulkQty" MinValue="0">
                                                                          <ClientSideEvents ValueChanged="Statusautocalculate" Init="InitTrans" />
@@ -1083,11 +1083,11 @@ function InitTrans(s, e) {
                                                         </dx:GridViewDataTextColumn>
                                                      <dx:GridViewDataTextColumn Caption="RR Date" FieldName="RRDate" ShowInCustomizationForm="True" VisibleIndex="16" UnboundType="String">
                                                         </dx:GridViewDataTextColumn>
-                                                        <dx:GridViewDataTextColumn Caption="Expiry Date" FieldName="ExpiryDate" ShowInCustomizationForm="True" VisibleIndex="17" UnboundType="String">
+                                                        <dx:GridViewDataTextColumn Caption="Expiry Date" FieldName="ExpiryDate"  Width="150px" ShowInCustomizationForm="True" VisibleIndex="17" UnboundType="String">
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn   Caption="Manufacturing Date" FieldName="Mkfgdate" Width="150px" ShowInCustomizationForm="True" VisibleIndex="18" UnboundType="String">
                                                         </dx:GridViewDataTextColumn>
-                                                       <dx:GridViewDataTextColumn FieldName="StorageType" Name="StorageType" ShowInCustomizationForm="True" VisibleIndex="19" >
+                                                       <dx:GridViewDataTextColumn FieldName="StorageType" Name="StorageType" Width="180px" ShowInCustomizationForm="True" VisibleIndex="19" >
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn  FieldName="Field1" Caption="Field1" ShowInCustomizationForm="True" VisibleIndex="20" Name="Field1"  CellStyle-BackColor="#99ccff"  Width="0px">
 <CellStyle BackColor="#99ccff"></CellStyle>
@@ -1120,7 +1120,7 @@ function InitTrans(s, e) {
                                                     </Columns>
                                                             <ClientSideEvents CustomButtonClick="OnCustomClick" />
                                                     <SettingsPager Mode="ShowAllRecords"/> 
-                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible" ColumnMinWidth="200" VerticalScrollableHeight="0"  /> 
+                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible"  VerticalScrollableHeight="0"  /> 
                                                     <ClientSideEvents BatchEditConfirmShowing="OnConfirm"
                                                         BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" />
                                                             <SettingsEditing Mode="Batch" />

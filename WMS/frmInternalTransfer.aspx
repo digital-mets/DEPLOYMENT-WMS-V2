@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmInternalTransfer.aspx.cs" Inherits="GWL.frmInternalTransfer" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -875,28 +875,28 @@
                                                     OnCustomCallback="gv1_CustomCallback" SettingsBehavior-AllowSort="false">  
                                                     <ClientSideEvents Init="OnInitTrans" />
                                                     <Columns> 
-                                                        <dx:GridViewDataTextColumn FieldName="TransType" Width="0"
+                                                        <dx:GridViewDataTextColumn FieldName="TransType"   Width="0"
                                                             VisibleIndex="0">
-                                                            <HeaderStyle CssClass="hidden-column" />
+                                                            <%--<HeaderStyle CssClass="hidden-column" />
                                                             <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                            <CellStyle CssClass="hidden-column" />--%>
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="DocNumber" Width="0"
                                                             VisibleIndex="0">
-                                                            <HeaderStyle CssClass="hidden-column" />
+                                                            <%--<HeaderStyle CssClass="hidden-column" />
                                                             <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                            <CellStyle CssClass="hidden-column" />--%>
                                                         </dx:GridViewDataTextColumn>
-                                                        <dx:GridViewDataTextColumn FieldName="RecordId" VisibleIndex="2" Visible="true" Width="0px" ReadOnly="true">
-                                                            <HeaderStyle CssClass="hidden-column" />
+                                                        <dx:GridViewDataTextColumn FieldName="RecordId" VisibleIndex="2" Width="0" ReadOnly="true">
+                                                            <%--<HeaderStyle CssClass="hidden-column" /> 
                                                             <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                            <CellStyle CssClass="hidden-column" /> --%>
                                                         </dx:GridViewDataTextColumn>
                                                          <dx:GridViewDataTextColumn FieldName="LineNumber" Width="0"
                                                             VisibleIndex="0">
-                                                             <HeaderStyle CssClass="hidden-column" />
+                                                            <%-- <HeaderStyle CssClass="hidden-column" />
                                                             <FilterCellStyle CssClass="hidden-column" />
-                                                            <CellStyle CssClass="hidden-column" />
+                                                            <CellStyle CssClass="hidden-column" />--%>
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="CustomerCode" Width="130px"
                                                             VisibleIndex="1">
@@ -927,11 +927,11 @@
                                                                 </dx:ASPxGridLookup>
                                                             </EditItemTemplate>
                                                         </dx:GridViewDataTextColumn>
-                                                        <dx:GridViewDataTextColumn FieldName="OldPalletID" ShowInCustomizationForm="True" VisibleIndex="16" Name="PalletID" Caption="Old Pallet ID" ReadOnly="true" >
+                                                        <dx:GridViewDataTextColumn FieldName="OldPalletID" ShowInCustomizationForm="True" VisibleIndex="16"  Caption="Old Pallet ID" ReadOnly="true" >
                                                         </dx:GridViewDataTextColumn> 
                                                         <dx:GridViewDataTextColumn FieldName="PalletID" ShowInCustomizationForm="True" VisibleIndex="16" Name="PalletID" Caption="Pallet ID" >
                                                         </dx:GridViewDataTextColumn>     
-                                                        <dx:GridViewDataTextColumn FieldName="OldBatchNumber" Name="BatchNumber" ShowInCustomizationForm="True" VisibleIndex="11" Width="149px" ReadOnly="true">
+                                                        <dx:GridViewDataTextColumn FieldName="OldBatchNumber" ShowInCustomizationForm="True" VisibleIndex="11" Width="149px" ReadOnly="true">
                                                         </dx:GridViewDataTextColumn>     
                                                         <dx:GridViewDataTextColumn FieldName="BatchNumber" Name="BatchNumber" ShowInCustomizationForm="True" VisibleIndex="11" Width="149px">
                                                         </dx:GridViewDataTextColumn>    
@@ -985,7 +985,7 @@
                                                     </Columns>
                                                             <ClientSideEvents CustomButtonClick="OnCustomClick" />
                                                     <SettingsPager Mode="ShowAllRecords"/> 
-                                                    <Settings HorizontalScrollBarMode="Visible" ColumnMinWidth="120" VerticalScrollableHeight="0" VerticalScrollBarMode="Visible"  /> 
+                                                    <Settings HorizontalScrollBarMode="Visible"  VerticalScrollableHeight="0" VerticalScrollBarMode="Visible"  /> 
                                                     <ClientSideEvents BatchEditConfirmShowing="OnConfirm" 
                                                         BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" />
                                                             <SettingsEditing Mode="Batch" />
@@ -1026,11 +1026,11 @@
                                                         </dx:GridViewDataTextColumn>
                                                            <dx:GridViewDataTextColumn FieldName="ItemCode" VisibleIndex="3" Width="150px" Name="glItemCode">
                                                         </dx:GridViewDataTextColumn>
-                                                        <dx:GridViewDataTextColumn FieldName="OldPalletID" ShowInCustomizationForm="True" VisibleIndex="16" Name="PalletID" Caption="Old Pallet ID" ReadOnly="true" >
+                                                        <dx:GridViewDataTextColumn FieldName="OldPalletID" ShowInCustomizationForm="True" VisibleIndex="16"   Caption="Old Pallet ID" ReadOnly="true" >
                                                         </dx:GridViewDataTextColumn> 
                                                         <dx:GridViewDataTextColumn FieldName="PalletID" ShowInCustomizationForm="True" VisibleIndex="16" Name="PalletID" Caption="Pallet ID"  >
                                                         </dx:GridViewDataTextColumn>     
-                                                        <dx:GridViewDataTextColumn FieldName="OldBatchNumber" Name="BatchNumber" ShowInCustomizationForm="True" VisibleIndex="11" ReadOnly="true">
+                                                        <dx:GridViewDataTextColumn FieldName="OldBatchNumber"   ShowInCustomizationForm="True" VisibleIndex="11" ReadOnly="true">
                                                         </dx:GridViewDataTextColumn>     
                                                         <dx:GridViewDataTextColumn FieldName="BatchNumber" Name="BatchNumber" ShowInCustomizationForm="True" VisibleIndex="11">
                                                         </dx:GridViewDataTextColumn>    

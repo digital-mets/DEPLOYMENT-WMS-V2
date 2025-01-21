@@ -12,7 +12,7 @@
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="assets/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.54.1/dist/apexcharts.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.54.1/dist/apexcharts.min.css"/>
     <link href="css/frmDashboardBasic2.css" rel="stylesheet" type="text/css" />
 
 </head>

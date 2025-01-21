@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmInbound.aspx.cs" Inherits="GWL.frmInbound" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Data.Linq" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Data.Linq" TagPrefix="dx" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -37,13 +37,13 @@
         .pnl-content {
             text-align: right;
         }
+
         #cp_form1_layout_PC_0_tblTransfer {
-            width:700px !important;
-            min-width:400px !important; 
-            min-width:700px !important; 
-            margin-left:0 !important;
+            width: 700px !important;
+            min-width: 400px !important;
+            min-width: 700px !important;
+            margin-left: 0 !important;
         }
-     
     </style>
     <!--#endregion-->
 
@@ -78,7 +78,7 @@
                     month: '2-digit',
                     day: '2-digit',
                     year: 'numeric'
-                }); 
+                });
             }
             else {
                 CompleteUnlaod = "01/01/1900";
@@ -341,12 +341,12 @@
                 //    var linenumber = s.GetColumnByField("LineNumber");
                 //    e.rowValues[linenumber.index].value = linecount++; // or any other default value
                 //}
-                 if (copyFlag) {
+                if (copyFlag) {
                     copyFlag = false;
                     for (var i = 0; i < s.GetColumnsCount(); i++) {
                         var column = s.GetColumn(i);
                         console.log(column.fieldName);
-                     
+
                         if (column.visible == false || column.fieldName == undefined || i == 1 || i > 6)
                             continue;
                         ProcessCells(0, e, column, s);
@@ -1319,7 +1319,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                              <dx:LayoutItem Caption="IsNoCharge">
+                                            <dx:LayoutItem Caption="IsNoCharge">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxCheckBox ID="chkIsNoCharge" runat="server" CheckState="Unchecked" OnLoad="CheckboxLoad" Text=" ">
@@ -1327,8 +1327,8 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                              
-                                          
+
+
                                             <%--<dx:LayoutItem Caption="Truck No">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
@@ -1337,7 +1337,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>--%>
-                                              <dx:LayoutItem Caption="Approving Officer">
+                                            <dx:LayoutItem Caption="Approving Officer">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxTextBox ID="txtofficer" runat="server" Width="170px" OnLoad="TextboxLoad">
@@ -1345,7 +1345,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                                <dx:LayoutItem Caption="Internal Transaction">
+                                            <dx:LayoutItem Caption="Internal Transaction">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxCheckBox ID="CheckIntExt" runat="server" ClientInstanceName="CheckIntExt" CheckState="Unchecked" OnLoad="CheckboxLoad" Text=" ">
@@ -1354,9 +1354,9 @@
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
 
-                                           
-                                            
-                                            
+
+
+
 
                                             <dx:LayoutItem Caption="ICN Total Quantity" ClientVisible="False" Name="ICNTotalQty">
                                                 <LayoutItemNestedControlCollection>
@@ -1368,7 +1368,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                          <dx:LayoutItem Caption="Handling In Pallet">
+                                            <dx:LayoutItem Caption="Handling In Pallet">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxSpinEdit ID="txtHandlingInPt" runat="server" ClientInstanceName="txtHandlingInPt" OnLoad="SpinEdit_Load" Width="170px" MaxValue="999999999">
@@ -1378,8 +1378,8 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                           
-                                        <dx:LayoutItem Caption="Clone #">
+
+                                            <dx:LayoutItem Caption="Clone #">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxTextBox ID="txtClone" runat="server" ClientInstanceName="clone" Width="170px">
@@ -1651,7 +1651,7 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                                            <dx:LayoutItem Caption="Client Representative" >
+                                            <dx:LayoutItem Caption="Client Representative">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <dx:ASPxTextBox ID="txtRep" runat="server" OnLoad="TextboxLoad" Width="170px">
@@ -1678,9 +1678,9 @@
                                         </Items>
                                     </dx:LayoutGroup>
                                     <dx:LayoutGroup Caption="Audit Trail" ColSpan="2" ColCount="2">
-                                        
-                                        <Items >
-                                  
+
+                                        <Items>
+
                                             <dx:LayoutItem Caption="Added By:">
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
@@ -1747,27 +1747,27 @@
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
-                         
-                                        
-           
+
+
+
                                         </Items>
-                                         <Items>
-                                         
-                                             <dx:LayoutItem ClientVisible="true" Caption="Transfers:" >
-                                               <LayoutItemNestedControlCollection>
-                                                   <dx:LayoutItemNestedControlContainer runat="server">
-                                                       <dx:ASPxGridView ID="tblTransfer" runat="server" ClientInstanceName="tblTransfer" AutoGenerateColumns="true">
-                                                           <SettingsPager Mode="ShowAllRecords" />
-                                                  
-                                                       </dx:ASPxGridView>
-                                                   </dx:LayoutItemNestedControlContainer>
-                                               </LayoutItemNestedControlCollection>
-                                           </dx:LayoutItem>
-                                         
-                                             </Items>
+                                        <Items>
+
+                                            <dx:LayoutItem ClientVisible="true" Caption="Transfers:">
+                                                <LayoutItemNestedControlCollection>
+                                                    <dx:LayoutItemNestedControlContainer runat="server">
+                                                        <dx:ASPxGridView ID="tblTransfer" runat="server" ClientInstanceName="tblTransfer" AutoGenerateColumns="true">
+                                                            <SettingsPager Mode="ShowAllRecords" />
+
+                                                        </dx:ASPxGridView>
+                                                    </dx:LayoutItemNestedControlContainer>
+                                                </LayoutItemNestedControlCollection>
+                                            </dx:LayoutItem>
+
+                                        </Items>
                                     </dx:LayoutGroup>
-                                    
-                                  
+
+
                                     <%--2023/09/18 M-Jay Adding Variance Tabe--%>
                                     <dx:LayoutGroup Caption="Variance">
                                         <Items>
@@ -1791,10 +1791,10 @@
                                                 <LayoutItemNestedControlCollection>
                                                     <dx:LayoutItemNestedControlContainer runat="server">
                                                         <%--<dx:ASPxTextBox ID="ArrivalTime" runat="server" Width="170px" ColCount="1" ReadOnly="True">
-                                                        </dx:ASPxTextBox>--%>  
+                                                        </dx:ASPxTextBox>--%>
                                                         <dx:ASPxDateEdit ID="ArrivalTime1" runat="server" Width="170px" ClientInstanceName="ArrivalTime" EditFormatString="MM/dd/yyyy hh:mm tt" UseMaskBehavior="True" TimeSectionProperties-Visible="True" ClientEnabled="true">
                                                             <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                        </dx:ASPxDateEdit> 
+                                                        </dx:ASPxDateEdit>
                                                     </dx:LayoutItemNestedControlContainer>
                                                 </LayoutItemNestedControlCollection>
                                             </dx:LayoutItem>
@@ -2025,7 +2025,7 @@
                                                             </PropertiesTextEdit>
                                                         </dx:GridViewDataTextColumn>
                                                         <dx:GridViewDataTextColumn FieldName="ItemCode" VisibleIndex="3" Width="100px" Name="glItemCode" PropertiesTextEdit-Native="true">
-                                                            <Settings AutoFilterCondition="Contains" />                                                            
+                                                            <Settings AutoFilterCondition="Contains" />
                                                             <PropertiesTextEdit Native="True"></PropertiesTextEdit>
                                                             <EditItemTemplate>
                                                                 <dx:ASPxGridLookup ID="glItemCode" runat="server" AutoGenerateColumns="False" AutoPostBack="false" OnInit="itemcode_Init" GridViewStylesEditors-Native="true"
@@ -2058,7 +2058,7 @@
                                                             <PropertiesTextEdit Native="True"></PropertiesTextEdit>
                                                             <Settings AutoFilterCondition="Contains" />
                                                         </dx:GridViewDataTextColumn>
-                                                        <dx:GridViewDataTextColumn FieldName="ColorCode" VisibleIndex="5" Width="0px" PropertiesTextEdit-Native="true" UnboundType="String">
+                                                        <dx:GridViewDataTextColumn FieldName="ColorCode" VisibleIndex="5" Width="0" PropertiesTextEdit-Native="true" UnboundType="String">
                                                             <PropertiesTextEdit Native="True"></PropertiesTextEdit>
                                                             <EditItemTemplate>
                                                                 <dx:ASPxGridLookup ID="glColorCode" runat="server" AutoGenerateColumns="False" AutoPostBack="false" GridViewStylesEditors-Native="true"
@@ -2156,7 +2156,7 @@
                                                             </CustomButtons>
                                                         </dx:GridViewCommandColumn>
                                                         <dx:GridViewDataTextColumn Name="ReceivedQty" Caption="Kilos" ShowInCustomizationForm="True" VisibleIndex="10" FieldName="ReceivedQty" PropertiesTextEdit-Native="true">
-                                                            <PropertiesTextEdit NullDisplayText="0" ConvertEmptyStringToNull="False" NullText="0" DisplayFormatString="{0:N4}" >
+                                                            <PropertiesTextEdit NullDisplayText="0" ConvertEmptyStringToNull="False" NullText="0" DisplayFormatString="{0:N4}">
                                                                 <ClientSideEvents ValueChanged="autocalculate" />
                                                             </PropertiesTextEdit>
                                                         </dx:GridViewDataTextColumn>
@@ -2321,7 +2321,7 @@
                                                     </SettingsCommandButton>
                                                     <SettingsPager Mode="ShowAllRecords" />
                                                     <SettingsBehavior AllowSort="false" />
-                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" ColumnMinWidth="120" VerticalScrollableHeight="530" />
+                                                    <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" VerticalScrollableHeight="530" />
                                                     <ClientSideEvents BatchEditConfirmShowing="OnConfirm" BatchEditRowValidating="Grid_BatchEditRowValidating"
                                                         BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" />
                                                     <SettingsEditing Mode="Batch" />
@@ -2417,7 +2417,8 @@
         <asp:SqlDataSource ID="TruckType" runat="server" ConnectionString="<%$ ConnectionStrings:GEARS-METSITConnectionString %>" SelectCommand="select TruckType from IT.TruckType" OnInit="Connection_Init"></asp:SqlDataSource>
         <%--<asp:SqlDataSource ID="sdsICNDetail" runat="server" ConnectionString="<%$ ConnectionStrings:GEARS-METSITConnectionString %>" SelectCommand="SELECT A.DocNumber,A.LineNumber,A.ItemCode,A.ColorCode,A.ClassCode,A.SizeCode,A.BulkQty,C.BulkUnit,InputBaseQty as ReceivedQty,A.Unit,c.ExpiryDate,c.BatchNumber,c.ManufacturingDate,c.ToLocation,c.PalletID,c.LotID,c.RRDocDate,c.PickedQty,c.Remarks,A.BaseQty,A.StatusCode,A.BarcodeNo,A.Field1,A.Field2,A.Field3,A.Field4,A.Field5,A.Field6,A.Field7,A.Field8,A.Field9 FROM WMS.ICNDetail A INNER JOIN WMS.ICN B ON A.DocNumber = B.DocNumber CROSS JOIN wms.inbounddetail C WHERE ISNULL(InboundDocNumber,'')=''">--%>
         <asp:SqlDataSource ID="sdsICNDetail" runat="server" ConnectionString="<%$ ConnectionStrings:GEARS-METSITConnectionString %>" SelectCommand="SELECT A.DocNumber,A.LineNumber,a.ItemCode,FullDesc,a.ColorCode,a.ClassCode,a.SizeCode,BulkQty,BulkUnit,InputBaseQty as ReceivedQty,Unit,A.ExpiryDateICN as ExpiryDate,A.BatchNumberICN as BatchNumber,A.ManufacturingDateICN as ManufacturingDate,'' as ToLocation,'' as PalletID,'' as LotID,GETDATE() as RRDocDate,0 as PickedQty,'' as Remarks,'' as Status,BaseQty,'' AS ICNQty,StatusCode,BarcodeNo,A.Field1,A.Field2,A.Field3,A.Field4,A.Field5,A.Field6,A.Field7,A.Field8,A.Field9,A.SpecialHandlingInstruc, '' AS NCRRemarks
-           FROM WMS.ICNDetail A INNER JOIN WMS.ICN B ON A.DocNumber = B.DocNumber left join masterfile.item c on a.itemcode = c.itemcode  and b.CustomerCode = c.Customer WHERE ISNULL(InboundDocNumber,'')='' group by  A.DocNumber,A.LineNumber,a.ItemCode,FullDesc,a.ColorCode,a.ClassCode,a.SizeCode,BulkQty,BulkUnit,InputBaseQty,Unit,BaseQty,StatusCode,BarcodeNo,A.Field1,A.Field2,A.Field3,A.Field4,A.Field5,A.Field6,A.Field7,A.Field8,A.Field9,A.SpecialHandlingInstruc,A.BatchNumberICN,A.ManufacturingDateICN,A.ExpiryDateICN  order by a.linenumber" OnInit="Connection_Init"></asp:SqlDataSource>
+           FROM WMS.ICNDetail A INNER JOIN WMS.ICN B ON A.DocNumber = B.DocNumber left join masterfile.item c on a.itemcode = c.itemcode  and b.CustomerCode = c.Customer WHERE ISNULL(InboundDocNumber,'')='' group by  A.DocNumber,A.LineNumber,a.ItemCode,FullDesc,a.ColorCode,a.ClassCode,a.SizeCode,BulkQty,BulkUnit,InputBaseQty,Unit,BaseQty,StatusCode,BarcodeNo,A.Field1,A.Field2,A.Field3,A.Field4,A.Field5,A.Field6,A.Field7,A.Field8,A.Field9,A.SpecialHandlingInstruc,A.BatchNumberICN,A.ManufacturingDateICN,A.ExpiryDateICN  order by a.linenumber"
+            OnInit="Connection_Init"></asp:SqlDataSource>
         <asp:SqlDataSource ID="StorageSrc" runat="server" ConnectionString="<%$ ConnectionStrings:GEARS-METSITConnectionString %>" SelectCommand="SELECT * FROM Masterfile.StorageType " OnInit="Connection_Init"></asp:SqlDataSource>
     </form>
 </body>

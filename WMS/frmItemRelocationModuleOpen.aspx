@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmItemRelocationModuleOpen.aspx.cs" Inherits="GWL.frmItemRelocationModuleOpen" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -34,6 +34,8 @@
     <script>
         var isValid = false;
         var counterror = 0;
+        var updatedvaluesIndex = []
+
 
         function getParameterByName(name) {
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -150,6 +152,7 @@
             else {
                 if (s.cp_fail) {
                     alert(s.cp_message);
+                    e.processOnServer = false;
                     delete (s.cp_success);//deletes cache variables' data
                     delete (s.cp_message);
                     delete (s.cp_fail)
@@ -196,6 +199,7 @@
         var linecount = 1;
         var isbusy;
         var editorobj;
+        var originalValue = null
         function OnStartEditing(s, e) {//On start edit grid function     
             rowIndex = e.visibleIndex;
             columnIndex = e.focusedColumn.index;
@@ -210,7 +214,9 @@
             if (entry == "V") {
                 e.cancel = true; //this will made the gridview readonly
             }
-
+            if (e.focusedColumn.fieldName === "ToLoc") {
+                originalValue = e.rowValues[columnIndex].value;
+            }
             if (entry != "V") {
 
                 if (e.focusedColumn.fieldName === "ItemCode" || e.focusedColumn.fieldName === "FullDesc" || e.focusedColumn.fieldName === "LineNumber"
@@ -220,7 +226,7 @@
                 }
 
 
-
+              
 
                 if (e.focusedColumn.fieldName === "Qty") {
                     if (isbusy == true) {
@@ -268,10 +274,39 @@
         }
 
         function OnEndEditing(s, e) {//end edit grid function, sets text after select/leaving the current lookup
-            var cellInfo = e.rowValues[currentColumn.index];
-            rowIndex = null;
-            columnIndex = null;
+            //var cellInfo = e.rowValues[currentColumn.index];
+            //rowIndex = null;
+            //columnIndex = null;
 
+
+            //console.log(e.visibleIndex);
+            var rowIndex = e.visibleIndex;
+            var cur = e.rowValues[currentColumn.index];
+            //fromloc value
+            var orig = e.rowValues[11];
+            //console.log(e);
+
+            //console.log(cur);
+            //console.log(orig);
+            // Compare the old value (originalValue) with the new value (newValue)
+            if (orig.value !== cur.value) {
+                //console.log("Change detected!");
+                if (!(updatedvaluesIndex.includes(e.visibleIndex))) {
+                    updatedvaluesIndex.push(rowIndex);
+                }
+
+                // You can now execute additional logic for handling the change, like saving the new value
+            } else if (orig.value == cur.value) {
+
+                if (updatedvaluesIndex.includes(e.visibleIndex)) {
+                    updatedvaluesIndex = updatedvaluesIndex.filter(index => index !== e.visibleIndex);
+                }
+            }
+            //else {
+            //    console.log("No change detected.");
+            //}
+
+            //console.log(updatedvaluesIndex);
 
 
         }
@@ -552,6 +587,75 @@
             }
         }
 
+
+        function OnUpdateClick2() {
+
+            //alert("Hello");
+            console.log(updatedvaluesIndex);
+            var updatedData = [];
+            var dataRe = gv1.batchEditApi.GetRowVisibleIndices();
+            for (var h = 0; h < dataRe.length; h++) {
+
+                if (updatedvaluesIndex.includes(h)) {
+                    const jsonData = {
+                        "TransType": "WMSREL",
+                        "DocNumber": txtDocnumber.GetText(),
+                        "DocDate": dtpdocdate.GetText(),
+                        "Customer": cmbStorerKey.GetText(),
+                        //"Userid": txtUser.GetText(),
+                        "WarehouseC": txtwarehousecode.GetText(),
+                        "RecordId": gv1.batchEditApi.GetCellValue(dataRe[h], "RecordId"),
+                        "ItemCode": gv1.batchEditApi.GetCellValue(dataRe[h], "ItemCode"),
+                        "PalletID": gv1.batchEditApi.GetCellValue(dataRe[h], "PalletID"),
+                        "ToPalletID": gv1.batchEditApi.GetCellValue(dataRe[h], "ToPalletID"),
+                        "FromLoc": gv1.batchEditApi.GetCellValue(dataRe[h], "FromLoc"),
+                        "ToLoc": gv1.batchEditApi.GetCellValue(dataRe[h], "ToLoc"),
+                        "Qty": gv1.batchEditApi.GetCellValue(dataRe[h], "Qty"),
+                        "BulkQty": gv1.batchEditApi.GetCellValue(dataRe[h], "BulkQty"),
+                        "BatchNumber": gv1.batchEditApi.GetCellValue(dataRe[h], "BatchNumber"),
+                        "Lottable2": gv1.batchEditApi.GetCellValue(dataRe[h], "Lottable2"),
+                        "Field1": gv1.batchEditApi.GetCellValue(dataRe[h], "Field1"),
+                        "Field2": gv1.batchEditApi.GetCellValue(dataRe[h], "Field2"),
+                        "Field3": gv1.batchEditApi.GetCellValue(dataRe[h], "Field3"),
+                    };
+                    updatedData.push(jsonData);
+                }
+            }
+
+            //console.log(updatedvaluesIndex)
+
+            if (updatedvaluesIndex.length > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "frmItemRelocationModuleOpen.aspx/RelocatePallet",
+                    contentType: "application/json",
+                    data: '{ _relocatePallets: ' + JSON.stringify(updatedData) + '}',
+                    dataType: "json",
+                    success: function (data) {
+
+                        if (data.d != '') {
+                            //console.log('eee');
+                            //ChargesPop.Hide();
+                            alert("ERROR : " + data.d);
+                        }
+
+                        else {
+                            //console.log('wwww');
+                            //ChargesPop.Hide();
+                            alert("SUCCESS : Submitted Successfully!")
+                            window.location.reload();
+                            updatedvaluesIndex = []
+                        }
+                    }
+                });
+
+            } else {
+
+                alert('No Value/s Changed!');
+
+            }
+
+        }
     </script>
     <!--#endregion-->
 </head>
@@ -601,7 +705,7 @@
                                                                 <dx:LayoutItem Caption="Warehouse Code:" Name="WarehouseCode">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                                                            <dx:ASPxGridLookup ID="txtwarehousecode" runat="server" AutoGenerateColumns="True" Width="170px" DataSourceID="Warehouse" OnLoad="LookupLoad" TextFormatString="{0}" KeyFieldName="WarehouseCode">
+                                                                            <dx:ASPxGridLookup ID="txtwarehousecode" runat="server" AutoGenerateColumns="True" Width="170px"   ClientInstanceName="txtwarehousecode"  DataSourceID="Warehouse" OnLoad="LookupLoad" TextFormatString="{0}" KeyFieldName="WarehouseCode">
                                                                                 <GridViewProperties>
                                                                                     <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                                                                                     <Settings ShowFilterRow="True"></Settings>
@@ -624,7 +728,7 @@
                                                                 <dx:LayoutItem Caption="Document Number:" Name="DocNumber">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                                                            <dx:ASPxTextBox ID="txtDocnumber" runat="server" Width="170px" ReadOnly="true">
+                                                                            <dx:ASPxTextBox ID="txtDocnumber"   ClientInstanceName ="txtDocnumber" runat="server" Width="170px" ReadOnly="true">
                                                                             </dx:ASPxTextBox>
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
@@ -632,7 +736,7 @@
                                                                 <dx:LayoutItem Caption="Document Date:" Name="DocDate" ColSpan="1">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                                                            <dx:ASPxDateEdit ID="dtpdocdate" runat="server" Width="170px" OnLoad="Date_Load">
+                                                                            <dx:ASPxDateEdit ID="dtpdocdate"   ClientInstanceName ="dtpdocdate" runat="server" Width="170px" OnLoad="Date_Load">
                                                                                 <ClientSideEvents Validation="OnValidation" ValueChanged="function(s, e) {
                                                                   
                                                                    cp.PerformCallback('DocDate');
@@ -718,7 +822,7 @@
                                                                                                     </dx:ASPxLabel>
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <dx:ASPxGridLookup ID="cmbStorerKey" runat="server" Width="170px" AutoGenerateColumns="False" DataSourceID="StorerKey" KeyFieldName="BizPartnerCode" OnLoad="LookupLoad" TextFormatString="{0}">
+                                                                                                    <dx:ASPxGridLookup ID="cmbStorerKey" runat="server" Width="170px"  ClientInstanceName ="cmbStorerKey"  AutoGenerateColumns="False" DataSourceID="StorerKey" KeyFieldName="BizPartnerCode" OnLoad="LookupLoad" TextFormatString="{0}">
                                                                                                         <GridViewProperties>
                                                                                                             <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                                                                                                             <Settings ShowFilterRow="True"></Settings>
@@ -798,8 +902,10 @@
                                                                                                 <td>
                                                                                                     <dx:ASPxButton ID="btnSearch" runat="server" Text="Search" AutoPostBack="false" UseSubmitBehavior="false" BackColor="CornflowerBlue" ForeColor="White">
                                                                                                         <ClientSideEvents Click="function(s, e) { endcbgrid = true; //loader.Show(); 
-                                                                                                                                 loader.SetText('Searching...'); 
+                                                                                                                                loader.SetText('Searching...'); 
                                                                                                                                  //gvExtract.PerformCallback('Pal');
+                                                                                                                                 updatedvaluesIndex= []
+                                                                                                                                 //console.log (updatedvaluesIndex);
                                                                                                                                  gv1.PerformCallback();
                                                                                                                                  }" />
                                                                                                     </dx:ASPxButton>
@@ -819,7 +925,7 @@
                                                                 </dx:LayoutItem>
                                                             </Items>
                                                             <Items>
-                                                                <dx:LayoutGroup Caption="Inventory Detail">
+                                                                <dx:LayoutGroup Caption="   il">
                                                                     <Items>
                                                                         <dx:LayoutItem Caption="">
                                                                             <LayoutItemNestedControlCollection>
@@ -830,34 +936,34 @@
                                                                                         <ClientSideEvents Init="OnInitTrans" />
                                                                                         <Columns>
                                                                                             <dx:GridViewDataTextColumn FieldName="TransType" Width="0px" VisibleIndex="0">
-                                                                                                <HeaderStyle CssClass="hidden-column" />
-                                                                                                <FilterCellStyle CssClass="hidden-column" />
-                                                                                                <CellStyle CssClass="hidden-column" />
+                                                                                              
+                                                                                              
+                                                                                                
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataTextColumn FieldName="DocDate" Width="0px" VisibleIndex="0">
-                                                                                                <HeaderStyle CssClass="hidden-column" />
-                                                                                                <FilterCellStyle CssClass="hidden-column" />
-                                                                                                <CellStyle CssClass="hidden-column" />
+                                                                                              
+                                                                                              
+                                                                                                
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataTextColumn FieldName="WHCode" Width="0px" VisibleIndex="0">
-                                                                                                <HeaderStyle CssClass="hidden-column" />
-                                                                                                <FilterCellStyle CssClass="hidden-column" />
-                                                                                                <CellStyle CssClass="hidden-column" />
+                                                                                              
+                                                                                              
+                                                                                                
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataTextColumn FieldName="CustCode" Width="0px" VisibleIndex="0">
-                                                                                                <HeaderStyle CssClass="hidden-column" />
-                                                                                                <FilterCellStyle CssClass="hidden-column" />
-                                                                                                <CellStyle CssClass="hidden-column" />
+                                                                                              
+                                                                                              
+                                                                                                
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataTextColumn FieldName="Storage" Width="0px" VisibleIndex="0">
-                                                                                                <HeaderStyle CssClass="hidden-column" />
-                                                                                                <FilterCellStyle CssClass="hidden-column" />
-                                                                                                <CellStyle CssClass="hidden-column" />
+                                                                                              
+                                                                                              
+                                                                                                
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataTextColumn FieldName="DocNumber" Width="0px" VisibleIndex="0">
-                                                                                                <HeaderStyle CssClass="hidden-column" />
-                                                                                                <FilterCellStyle CssClass="hidden-column" />
-                                                                                                <CellStyle CssClass="hidden-column" />
+                                                                                              
+                                                                                              
+                                                                                                
                                                                                             </dx:GridViewDataTextColumn>
                                                                                             <dx:GridViewDataTextColumn FieldName="LineNumber" VisibleIndex="2" Caption="RecordID" ReadOnly="True" Width="70px">
                                                                                             </dx:GridViewDataTextColumn>
@@ -904,7 +1010,7 @@
                                                                                         </Columns>
                                                                                         <ClientSideEvents CustomButtonClick="OnCustomClick" />
                                                                                         <SettingsPager Mode="ShowAllRecords" />
-                                                                                        <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible" ColumnMinWidth="200" VerticalScrollableHeight="0" />
+                                                                                        <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Visible"  VerticalScrollableHeight="0" />
                                                                                         <ClientSideEvents BatchEditConfirmShowing="OnConfirm"
                                                                                             BatchEditStartEditing="OnStartEditing" BatchEditEndEditing="OnEndEditing" />
                                                                                         <SettingsEditing Mode="Batch" />
@@ -1083,7 +1189,7 @@
                         <dx:ASPxCheckBox Style="display: inline-block;" ID="glcheck" runat="server" ClientInstanceName="glcheck" TextAlign="Left" Text="Prevent auto-close upon submit" CheckState="Checked" Width="200px"></dx:ASPxCheckBox>
                         <dx:ASPxButton ID="updateBtn" runat="server" Text="Submit" AutoPostBack="False" CssClass="btn" ClientInstanceName="btn"
                             UseSubmitBehavior="false" CausesValidation="true">
-                            <ClientSideEvents Click="OnUpdateClick" />
+                            <ClientSideEvents Click="OnUpdateClick2" />
                         </dx:ASPxButton>
                     </div>
                 </dx:PanelContent>

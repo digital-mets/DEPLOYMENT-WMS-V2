@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Translist.aspx.cs" Inherits="GWL.Translist" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Data.Linq" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Data.Linq" TagPrefix="dx" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 <%@ Register TagPrefix="wc" TagName="UpldDocsPopup" Src="~/WebControl/Accounting/wc_UpldDocsPopup.ascx" %>
 <%@ Register TagPrefix="wc" TagName="UpldSignPopup" Src="~/WebControl/Accounting/wc_UpldSignPopup.ascx" %>
 <%@ Register TagPrefix="wc" TagName="DocRmkPopup" Src="~/WebControl/Accounting/wc_DocRmkPopup.ascx" %>
@@ -1230,7 +1230,10 @@
                     let alertType = "error";
                     alertMesage(alertType, "No selected row/s in table", "Please select on table");
                 }
-
+				else if (s.cp_countsubmited == s.cp_counttotal || s.cp_success == "success") {
+					let alertType = "success";
+					alertMesage(alertType, s.cp_modaltitle, s.cp_submitalert);
+				}
                 else if (s.cp_countsubmited == 0 || s.cp_counttotal == 0) {
                     let alertType = "error";
                     alertMesage(alertType, s.cp_modaltitle, s.cp_submitalert);
@@ -4166,7 +4169,7 @@
         }
 
 
-    </script>
+	</script>
 </head>
 <body>
     <form id="form1" runat="server">

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmServiceProcessing.aspx.cs" Inherits="GWL.frmServiceProcessing" %>
 
-<%@ Register Assembly="DevExpress.Web.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -1105,7 +1105,7 @@
                                                                                     </dx:GridViewDataTextColumn>
                                                                                 </Columns>
                                                                                 <SettingsPager Mode="ShowAllRecords" />
-                                                                                <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" ColumnMinWidth="120" VerticalScrollableHeight="530" />
+                                                                                <Settings HorizontalScrollBarMode="Visible" VerticalScrollBarMode="Auto" VerticalScrollableHeight="530" />
                                                                                 <ClientSideEvents BatchEditConfirmShowing="OnConfirm"
                                                                                     BatchEditStartEditing="OnStartEditing1" BatchEditEndEditing="OnEndEditing" />
                                                                                 <SettingsEditing Mode="Batch" />
